@@ -1,0 +1,26 @@
+@media screen and (min-width: 1020px){
+	.mobio .mid img{width: 280px;height: 570px;}
+}
+@media screen and (max-width: 960px){
+	header .icon a:first-child{display: inline-block;}
+	header nav{display: none;}
+	.oshing li{width: 100%;}
+	.oshing li:hover{padding: 2.8% 0 6.8%;}
+}
+@media screen and (max-width: 770px){
+	.mobio{padding: 11.8% 3%;}
+	.mobio .left,.mobio .mid,.mobio .right{float: none;width: 100%;}
+	.mobio .mid{padding: 25px 0 75px;}
+	.mobio-list{padding: 0 21% 5%;}
+	.mobio-list i{left: 13%;top:14px;}
+	.mobio .mid img{width: 60.2%;}
+	.work{padding: 0 2.6%;}
+	.work .img-list li{width: 42.2%;padding: 0 2.6% 5.2%;}
+	footer .top{padding:70px 0 130px;}
+	footer .mix{float: none;width: 58%;padding: 0 0 0 21%;margin-bottom: 76px;}
+	footer .mix1 p{padding-bottom: 6.6%}
+	footer .mix1 ul{height: 33px;}
+	footer .recent>div{width: 50px;height: 50px;}
+	footer .recent img{height: 100%;}
+	footer .mix4 li{padding:0 5px 11px 5px;}
+}

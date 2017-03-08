@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时钟</title>
+    <script>
+    window.onload=function(){
+//        获取对象与上下文
+        var cvs = document.getElementById("cvs");
+        var ctx = cvs.getContext("2d");
+//        绘图
+        function toDraw(){
+            ctx.clearRect(0,0,cvs.width,cvs.height);//清除画布
+            //获取当前时间=================
+            var myDate=new Date();
+            var iS=myDate.getSeconds();
+            var iM=myDate.getMinutes()+iS/60;
+            var iH=myDate.getHours()+iM/60;
+            //转化时间为弧度
+            var iHVle=(iH*30-90)*Math.PI/180;
+            var iMVle=(iM*6-90)*Math.PI/180;
+            var iSVle=(iS*6-90)*Math.PI/180;
+            //设置并绘制路径============================
+            //分钟表盘-----------
+            for(var i=0;i<60;i++){
+                ctx.beginPath();
+                ctx.moveTo(300,300);
+                ctx.arc(300,300,100,i*6*Math.PI/180,(i+1)*6*Math.PI/180);
+                ctx.stroke();
+            }
+            ctx.fillStyle="#fff";
+            ctx.beginPath();
+            ctx.arc(300,300,95,0*Math.PI/180,360*Math.PI/180);
+            ctx.fill();
+            //时钟表盘-----------
+            for(var i=0;i<12;i++){
+                ctx.save();
+                ctx.lineWidth='2';
+                ctx.beginPath();
+                ctx.moveTo(300,300);
+                ctx.arc(300,300,100,i*30*Math.PI/180,(i+1)*30*Math.PI/180);
+                ctx.stroke();
+                ctx.restore();
+            }
+            ctx.fillStyle="#fff";
+            ctx.beginPath();
+            ctx.arc(300,300,90,0*Math.PI/180,360*Math.PI/180);
+            ctx.fill();
+            //秒针
+            ctx.save();
+            ctx.lineWidth='1';
+            ctx.beginPath();
+            ctx.moveTo(300,300);
+            ctx.arc(300,300,80,iSVle,iSVle);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.restore();
+            //分针
+            ctx.save();
+            ctx.lineWidth='2';
+            ctx.beginPath();
+            ctx.moveTo(300,300);
+            ctx.arc(300,300,65,iMVle,iMVle);
+            ctx.stroke();
+            ctx.restore();
+            //时针
+            ctx.save();
+            ctx.lineWidth='4';
+            ctx.beginPath();
+            ctx.moveTo(300,300);
+            ctx.arc(300,300,45,iHVle,iHVle);
+            ctx.stroke();
+            ctx.restore();
+        }
+        //定时器刷新调用
+        setInterval(function(){
+            toDraw();
+        },1000);
+    }
+    </script>
+</head>
+<body>
+<canvas id="cvs" width="600" height="600">该浏览器不支持canvas</canvas>
+</body>
+</html>

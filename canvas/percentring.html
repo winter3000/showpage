@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CANVAS</title>
+    <script>
+        window.onload=function() {
+            var cvs = document.getElementById("cvs");
+            var ctx = cvs.getContext("2d");
+        //绘制数据圆环状图===========================
+            function secetion(item){
+                ctx.beginPath();
+                ctx.strokeStyle=item.color;
+                ctx.lineWidth=100;
+                ctx.arc(200, 200, 120,Math.PI*item.start,Math.PI *(item.start +item.length));
+                ctx.stroke();
+            }
+            var mynum=[0.1,0.5,0.22,0.18];
+            var colorList=["#ffce88", "#ff807f","#ff85d7","#a879ff"];
+            //目标值数据
+            var targets=[];
+            var start=0;
+            for (var i=0;i<mynum.length;i++){
+               var target={start: start, length: 2*mynum[i], color: colorList[i]};
+                start+=2*mynum[i];
+                targets.push(target);
+            }
+            //计时器运动
+            var speed=10;
+            var count=0;
+            var timer=setInterval(draw,100);
+            function draw(){
+                ctx.clearRect(0,0,cvs.width,cvs.height);//清除画布
+                for(var i=0;i<mynum.length;i++){
+                    //构造变化数据
+                   var start=targets[i].start*count/speed;
+                    var length=targets[i].length*count/speed;
+                    var item={start: start, length: length, color: colorList[i]};
+                    //绘制新图
+                    secetion(item);
+                }
+                if(count<speed){count++;}else {clearInterval(timer)}
+            }
+        }
+    </script>
+</head>
+<body>
+<canvas id="cvs" width="400" height="400">该浏览器不支持canvas</canvas>
+</body>
+</html>
